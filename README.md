@@ -1,4 +1,17 @@
 # PHASE-3-PROJECT
+## ERM
++-------------+       +----------------+       +--------+
+|   Customer  | 1--*  | Transaction    |       | Account|
++-------------+       +----------------+       +--------+
+| id          | <---  | id             |       | id     |
+| first_name  |       | date           |       | type   |
+| last_name   |       | description    |       | balance|
++-------------+       | amount         |       | user_id|
+                      | account_id (FK)|       +--------+
+                      | customer_id (FK)|
+                      +----------------+
+                      
+
 ## How to use it 
 - This bank management system project performs the essential functions of banking software. It allows the user to:
 
