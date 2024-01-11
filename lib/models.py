@@ -32,8 +32,8 @@ class Transaction(Base):
     description = Column(String)
     amount = Column(Float)
     
-    account_id = Column(Integer, ForeignKey('accounts.id'), nullable=False)  # Add nullable=False
-    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=False)  # Add nullable=False
+    account_id = Column(Integer, ForeignKey('accounts.id'), nullable=False)  
+    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=False) 
     
     account = relationship("Account", back_populates="transactions")
     customer = relationship("Customer", back_populates="transactions")
@@ -47,8 +47,7 @@ class Account(Base):
     account_type = Column(String)
     account_balance = Column(Float)
     
-    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=False)  # Add nullable=False
-    
+    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=False)  
     customer = relationship("Customer", back_populates="accounts")
     transactions = relationship("Transaction", back_populates="account")
     

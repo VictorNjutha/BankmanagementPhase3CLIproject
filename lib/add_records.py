@@ -1,15 +1,14 @@
 from sqlalchemy.orm import sessionmaker
-from models import Customer ,Account,Transaction # Adjust the import path
+from models import Customer ,Account,Transaction 
 
 
-# Create an SQLAlchemy session
 from sqlalchemy import create_engine
 
 engine = create_engine('sqlite:///bank.db')
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# Create a Customer object 
+
 def add_customer_to_db(first_name, last_name):
     new_customer = Customer(first_name=first_name, last_name=last_name)
     session.add(new_customer)
@@ -37,11 +36,11 @@ def add_transaction_to_db(date,description,amount,customer_id,account_id):
     return new_transaction
 def get_customer_id_and_balance_for_account(account_id):
     try:
-        # Query the account by its ID
+        
         account = session.query(Account).filter(Account.id == account_id).first()
 
         if account:
-            # Return both the customer ID and the current account balance
+           
             return account.customer_id, account.account_balance
         else:
             return None, None
@@ -51,11 +50,11 @@ def get_customer_id_and_balance_for_account(account_id):
         return None, None
 def update_account_balance(account_id, new_balance):
     try:
-        # Query the account by its ID
+        
         account = session.query(Account).filter(Account.id == account_id).first()
 
         if account:
-            # Update the account balance
+           
             account.account_balance = new_balance
             session.commit()
         else:

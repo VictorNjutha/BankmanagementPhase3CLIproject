@@ -8,7 +8,7 @@ from models import Customer, Transaction, Account
 
 fake = Faker()
 
-# ...
+
 
 if __name__ == '__main__':
     
@@ -16,7 +16,7 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
     
-    # Clear old data
+   
     session.query(Customer).delete()
     session.query(Transaction).delete()
     session.query(Account).delete()
@@ -33,8 +33,7 @@ if __name__ == '__main__':
     ]
 
     session.add_all(customers)
-    session.commit()  # Commit the customers to get valid IDs
-
+    session.commit()  
     print("Seeding accounts...")
 
     account_types = ["savings", "current"]
@@ -49,8 +48,7 @@ if __name__ == '__main__':
     ]
 
     session.add_all(accounts)
-    session.commit()  # Commit the accounts to get valid IDs
-
+    session.commit() 
     print("Seeding transactions...")
 
     transaction_types = ["deposit", "withdrawal"]
@@ -60,17 +58,17 @@ if __name__ == '__main__':
     for i in range(100):
         customer = random.choice(customers)
 
-        # Filter accounts to only include those belonging to the selected customer
+        
         valid_accounts = [acc for acc in accounts if acc.customer_id == customer.id]
 
         if not valid_accounts:
-            continue  # Skip this iteration if there are no valid accounts for the customer
+            continue 
 
         account = random.choice(valid_accounts)
 
         transaction = Transaction(
             date=fake.date_time_between(start_date="-1y", end_date="now"),
-            amount=random.randint(1, 100000),  # Adjust the range as needed
+            amount=random.randint(1, 100000), 
             description=random.choice(transaction_types),
             customer_id=customer.id,
             account_id=account.id

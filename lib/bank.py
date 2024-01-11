@@ -13,7 +13,7 @@ GREEN = "\033[92m"
 RED = "\033[91m"
 RESET = "\033[0m"
 def clear_screen():
-    os.system('clear')  # Replace with 'cls' for Windows
+    os.system('clear') 
 
 def print_header(text):
     
@@ -25,7 +25,7 @@ def print_success(message):
 def print_error(message):
     print(RED + message + RESET)
 
-# Rest of the code remains the same...
+
 
 
 def main():
@@ -133,7 +133,7 @@ def add_customer():
 def add_account():
     print_header("Add a New Account")
     
-    # Prompt for account type (savings or current)
+   
     while True:
         account_type = input("Enter the account type (savings or current): ").strip().lower()
         if account_type not in ["savings", "current"]:
@@ -141,7 +141,7 @@ def add_account():
         else:
             break
       
-    # Prompt for account balance
+    
     while True:
         account_balance_str = input("Enter the initial deposit: ").strip()
         try: 
@@ -153,7 +153,7 @@ def add_account():
         except  ValueError: 
             print_error("Invalid input. Please enter a positive number for account balance.")        
         
-    # Prompt for customer ID
+   
     while True:
         customer_id_str = input("Enter the ID of the customer: ").strip()
         try:
@@ -165,7 +165,7 @@ def add_account():
         except ValueError:
             print_error("Invalid input. Please enter a positive number for customer ID.")
     
-    # Call the add_account_to_db function with the validated parameters
+    
     new_account = add_account_to_db(account_type, account_balance, customer_id)
 
     if new_account:
@@ -175,7 +175,7 @@ def add_account():
 def add_transaction():
     print_header("Add a New Transaction")
     
-    # Prompt for account ID
+    
     while True:
         account_id_str = input("Enter the ID of the account: ").strip()
         try:
@@ -183,7 +183,7 @@ def add_transaction():
             if not (account_id > 0 and account_exists(account_id)):
                 print_error("Account not in the database.")
             else:
-                # Retrieve the customer ID and current account balance associated with the account
+                
                 customer_id, current_balance = get_customer_id_and_balance_for_account(account_id)
                 if customer_id is not None:
                     break
@@ -192,7 +192,7 @@ def add_transaction():
         except ValueError:
             print_error("Invalid input. Please enter a positive number for account ID.")
     
-    # Prompt for amount
+  
     while True:
         amount_str = input("Enter the amount: ").strip()
         try:
@@ -213,17 +213,17 @@ def add_transaction():
     
     date = datetime.now().date()
     
-    # Determine if the transaction is a deposit or withdrawal and update the account balance accordingly
+   
     if description == "deposit":
         new_balance = current_balance + amount
     else:
         new_balance = current_balance - amount
     
-    # Call the add_transaction_to_db function with the validated parameters
+    
     new_transaction = add_transaction_to_db(date, description, amount, customer_id, account_id)
 
     if new_transaction:
-        # Update the account balance in the database
+        
         update_account_balance(account_id, new_balance)
         
         print_success(f"Transaction for customer {customer_id} and account {account_id} has been added to the database.")
@@ -233,7 +233,7 @@ def delete_customer():
     clear_screen()
     print_header("Delete a customer:")
     
-    # Prompt for customer ID
+   
     while True:
         customer_id_str = input("Enter the ID of the customer: ").strip()
        
@@ -247,7 +247,7 @@ def delete_customer():
         except ValueError:
             print_error("Invalid input. Please enter a positive number for customer ID.")
     
-    # Call the delete_customer_and_associated_data function with the validated parameters
+    
     delete_customer_and_associated_data(customer_id)
     
     print_success(f"Customer with ID {customer_id}, associated accounts, and transactions have been deleted.")   

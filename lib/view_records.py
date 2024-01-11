@@ -3,7 +3,7 @@ from models import Customer, Transaction, Account
 
 from sqlalchemy import create_engine
 
-# Create an SQLAlchemy session
+
 engine = create_engine('sqlite:///bank.db')
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -18,7 +18,7 @@ def list_all_customers():
         print("No customers found in the database.")
 
 
-# Function to list accounts for a specific customer
+
 def list_accounts_for_customer(customer_id):
     customer = session.query(Customer).filter(Customer.id == customer_id).first()
     if customer:
@@ -32,7 +32,7 @@ def list_accounts_for_customer(customer_id):
     else:
         print("Customer not found.")
 
-# Function to list transactions for a specific customer
+
 def list_transactions_for_customer(customer_id):
     customer = session.query(Customer).filter(Customer.id == customer_id).first()
     if customer:
@@ -46,8 +46,8 @@ def list_transactions_for_customer(customer_id):
     else:
         print("Customer not found.")
 
-# Example usage of the functions
+
 if __name__ == "__main__":
-    list_accounts_for_customer(1)  # Replace 1 with the desired customer ID
-    list_transactions_for_customer(1)  # Replace 1 with the desired customer ID
+    list_accounts_for_customer(1)  
+    list_transactions_for_customer(1)  
     list_all_customers()
